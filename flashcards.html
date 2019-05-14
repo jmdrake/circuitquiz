@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Phys Quiz</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <style>
+            .w3-btn {margin-bottom:10px;}
+        </style>
+        <script>
+            var question = 0;
+            var score = 0;
+            var possible = 0;
+            
+            function checkAnswer(){
+                var circuit = document.getElementById("circuit").value;
+                var lighton = document.getElementById("lighton").value;
+                if(quiz[question].circuit == circuit) score += 1;
+                if(quiz[question].lighton == lighton) score += 1;
+                possible += 2;
+                document.getElementById("answer").innerHTML = quiz[question].circuit + "; " + quiz[question].lighton;
+                $("#btnNext").show();
+                $("#btnAnswer").hide();
+                $("#btnHint").hide();
+                $("#hint").hide();
+            }
+
+            function nextQuestion() {
+                question++;
+                if(question < quiz.length) {
+                    document.getElementById("diagram").setAttribute("data", "images/" + quiz[question].img);
+                    document.getElementById("answer").innerHTML = "";
+                    $("#btnNext").hide();
+                    $("#btnAnswer").show();
+                    $("#btnHint").show();
+                    $("#hint").hide();
+                    $("#circuit").val("");
+                    $("#lighton").val("");
+                } else {
+                    document.getElementById("answer").innerHTML = "Score : " + score + " out of " + possible + ".<br>Reload to retake quiz.";
+                    $("#btnNext").hide();
+                }
+                
+            }
+            
+            var quiz = [
+                {
+                    img : "circuit1.svg",
+                    circuit : "open",
+                    lighton : "no"
+                },
+                {
+                    img : "circuit2.svg",
+                    circuit : "closed",
+                    lighton : "yes"
+                },                
+                {
+                    img : "circuit3.svg",
+                    circuit : "closed",
+                    lighton : "yes"
+                },
+                {
+                    img : "circuit4.svg",
+                    circuit : "closed",
+                    lighton : "yes"
+                },                 
+                {
+                    img : "circuit5.svg",
+                    circuit : "closed",
+                    lighton : "yes"
+                },
+                {
+                    img : "circuit6.svg",
+                    circuit : "short",
+                    lighton : "yes"
+                },                
+                {
+                    img : "circuit7.svg",
+                    circuit : "open",
+                    lighton : "no"
+                },
+                {
+                    img : "circuit8.svg",
+                    circuit : "short",
+                    lighton : "yes"
+                },                                 
+            ];
+            
+            var hinttext = "Short circuit : You can trace a path from battery to itself without going through a resitor.<br>" +
+                            "Closed circuit : There is no short circuit and you can trace a path from battery to itself by going through a resistor.<br>" +
+                            "Open circuit : There is no path you can trace from the battery to itself.";
+            
+        </script>
+    </head>
+    <body>
+        <div class="w3-container">
+            <h2>Phys Quiz</h2>
+            <object id="diagram" data="images/circuit1.svg" type="image/svg+xml"></object>
+            <h3>Is the circuit open, closed or short?  With the bulb light?</h3>
+            <p>
+                This circuit is 
+                <select id="circuit">
+                    <option></option>                     
+                    <option value="open">open</option>
+                    <option value="closed">closed</option>
+                    <option value="short">short</option>
+                </select>.
+                Will the light bulb light?
+                <select id="lighton">
+                    <option></option>                     
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                </select>                
+            </p>
+            <p>
+              <button id="btnAnswer" class="w3-button w3-white w3-border" onclick="checkAnswer()">Answer</button>
+              <button id="btnHint" class="w3-button w3-white w3-border" onclick="$('#hint').show();">Hint</button>
+              <div id="answer"></div>
+              <div id="hint" style="display:none">
+                  <ul>
+                      <li>Short circuit : You can trace a path from battery to itself without going through a resitor</li>
+                      <li>Closed circuit : There is no short circuit and you can trace a path from battery to itself by going through a resistor.</li>
+                      <li>Open circuit : There is no path you can trace from the battery to itself.</li>
+                  </ul>
+              </div>
+              <button id="btnNext" class="w3-button w3-white w3-border" style="display:none" onclick="nextQuestion()">Next</button>
+            </p>
+        </div>
+    </body>
+</html>

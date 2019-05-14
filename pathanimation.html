@@ -1,0 +1,31 @@
+<html>
+    <style>
+svg {
+  width: 300px;
+  display: block;
+  position: absolute;
+  
+  .path {
+    stroke-dasharray: 320;
+    stroke-dashoffset: 0;
+    animation: dash 1s linear;
+  }
+  
+  @keyframes dash {
+    from {
+      stroke-dashoffset: 320;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}        
+    </style>  
+    <body>
+<svg width="640" height="240" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+    <path fill="transparent" stroke="#000000" stroke-width="4" d="M10 80 Q 77.5 10, 145 80 T 280 80" class="path"></path>
+  <path fill="transparent" stroke="#FF2851" stroke-width="4" d="M10 80 Q 77.5 10, 145 80 T 280 80" class="line2"></path>
+  <path fill="transparent" stroke="#000000" stroke-width="4" d="M10 80 Q 77.5 10, 145 80 T 280 80" class="line1"></path>
+</svg>
+    </body>
+</html>
